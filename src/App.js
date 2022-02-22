@@ -2,6 +2,7 @@ import { Container, Flex, Spinner, VStack } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import Post from "./components/post";
 import db from "./lib/firebase";
+import Navbar from "./components/navbar";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
