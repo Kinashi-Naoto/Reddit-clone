@@ -12,19 +12,23 @@ const App = () => {
 
     db.collection("posts")
       .orderBy("createdAt", "desc")
-      .get()
-      .then((querySnapshot) => {
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+      .onSnapshot((querySnapshot) => {
+        const _posts = [];
 
-        setPosts(data);
+        querySnapshot.forEach((doc) => {
+          _posts.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+
+        setPosts(_posts);
       });
   }, []);
 
   return (
     <>
+      <Navbar />
       <Container maxW="md" centerContent p={8}>
         <VStack spacing={8} w="100%">
           {posts.map((post) => (
